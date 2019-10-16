@@ -33,7 +33,7 @@ public class PlayerInteractionItem : MonoBehaviour
             //case bucket plus lake 
             if (inventory.GetInventoryItemName() == "bucket"  && currentInterItem.name == "lake" )
             {
-
+                inventory.SetInventoryProperty("full", "bucket_full");
                
                 //inventory.UpdateInventoryItem();
             }

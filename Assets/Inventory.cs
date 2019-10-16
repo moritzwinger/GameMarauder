@@ -7,6 +7,7 @@ public class Inventory : MonoBehaviour
 {
     public GameObject inventory = new GameObject();
     public Image InventoryImage;
+    public string property;
 
     // pick up item
     public void AddItem(GameObject item)
@@ -17,7 +18,8 @@ public class Inventory : MonoBehaviour
             // inventory = item;
             //update UI (Inventory)
             //InventoryImage.sprite = item.GetComponent<SpriteRenderer>().sprite;      
-            UpdateInventoryItem(item);
+            inventory = item;
+            InventoryImage.sprite = item.GetComponent<SpriteRenderer>().sprite;
             item.SendMessage("DoInteraction");
         } 
         // inventory  full
@@ -25,7 +27,9 @@ public class Inventory : MonoBehaviour
         {
             // drop current item and replace
             DropItem();
-            UpdateInventoryItem(item);
+            // UpdateInventory
+            inventory = item;
+            InventoryImage.sprite = item.GetComponent<SpriteRenderer>().sprite;
             item.SendMessage("DoInteraction");
         }
     }
@@ -43,13 +47,14 @@ public class Inventory : MonoBehaviour
         return inventory.name;
     }
 
-    // update Item in inventory: replace sprite and name (eg: filling a bucket)
-    public void UpdateInventoryItem(GameObject replacementItem)
+
+    // this method sets the inventory variable (use it to define properties of a given object in the inventory)
+    // and replaces the sprite
+    public void SetInventoryProperty(string prop, string title)
     {
-        //Debug.Log(replacementItem.title);
-        inventory = replacementItem;
-        InventoryImage.sprite = replacementItem.GetComponent<SpriteRenderer>().sprite;
- 
+        this.property = prop;
+        this.inventory.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Items/" + title);
+        InventoryImage.sprite = this.inventory.GetComponent<SpriteRenderer>().sprite;
     }
 
 }
