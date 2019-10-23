@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +21,7 @@ public class PlayerInteractionItem : MonoBehaviour
 
     private void Update()
     {
-        
+        //INTERACT
         //pick up item
         if (Input.GetButtonDown("Interact") && currentInterItem != null)
         {
@@ -31,14 +31,25 @@ public class PlayerInteractionItem : MonoBehaviour
                 Debug.Log("adding" + currentInterItem.name);
                 inventory.AddItem(currentInterItem);
             }
+            // cant be stored in inventory: do something else
+            // read sign
+            else if (currentInterItem.name == "sign")
+            {
+                Debug.Log("TEST");
+            }
         }
         // drop item
         if (Input.GetButtonDown("Drop"))
         {
                 inventory.DropItem();   
         }
-        //use item with an interactable environment 
-        if (Input.GetButtonDown("Use") && currentInterItem != null)
+
+
+
+
+        // USE
+        // item with an interactable environment 
+            if (Input.GetButtonDown("Use") && currentInterItem != null)
         {
             // bucket plus lake gives fulll bucket
             if (inventory.GetInventoryItemName() == "bucket"  && currentInterItem.name == "lake" )
@@ -47,21 +58,19 @@ public class PlayerInteractionItem : MonoBehaviour
                
                 //inventory.UpdateInventoryItem();
             }
+            // interactable objects that cant be picked up
 
             // full bucket puls plant grows tree and yields fruit 
             if (inventory.GetInventoryItemName() == "bucket" && currentInterItem.name == "plant" && inventory.GetInventoryProperty() == "full")
             {
-                //TODO
                 //1. empty bucket
                 inventory.SetInventoryProperty("empty", "bucket");
                 //2. play growing tree animation once
                 currentInterItem.GetComponent<Animator>().Play("PlantAnim");
                 //3. make fruit visible: this is horrible make gameobject database TODO
                 allItems[0].SetActive(true);
-                
-
-
             }
+            
         }
     }
 
