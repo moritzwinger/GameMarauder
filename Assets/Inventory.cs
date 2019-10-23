@@ -57,4 +57,9 @@ public class Inventory : MonoBehaviour
         InventoryImage.sprite = this.inventory.GetComponent<SpriteRenderer>().sprite;
     }
 
+    public string GetInventoryProperty()
+    {
+        return this.property;
+    }
+
 }

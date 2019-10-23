@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class PlayerInteractionItem : MonoBehaviour
 {
-
+    public GameObject[] allItems = new GameObject[10];
     public GameObject currentInterItem = null;
     public InteractionItem currentInterItemScript = null;
     public Inventory inventory;
+
+
+    private void Awake()
+    {
+        // initialize all game objects of items and put them in an array, so they can easily be accessed
+
+        // get all gameobjects
+       // Resources.FindObjectsOfTypeAll(typeof(GameObject))
+    }
+
 
     private void Update()
     {
@@ -27,15 +37,30 @@ public class PlayerInteractionItem : MonoBehaviour
         {
                 inventory.DropItem();   
         }
-        //use item with an interactable item 
+        //use item with an interactable environment 
         if (Input.GetButtonDown("Use") && currentInterItem != null)
         {
-            //case bucket plus lake 
+            // bucket plus lake gives fulll bucket
             if (inventory.GetInventoryItemName() == "bucket"  && currentInterItem.name == "lake" )
             {
                 inventory.SetInventoryProperty("full", "bucket_full");
                
                 //inventory.UpdateInventoryItem();
+            }
+
+            // full bucket puls plant grows tree and yields fruit 
+            if (inventory.GetInventoryItemName() == "bucket" && currentInterItem.name == "plant" && inventory.GetInventoryProperty() == "full")
+            {
+                //TODO
+                //1. empty bucket
+                inventory.SetInventoryProperty("empty", "bucket");
+                //2. play growing tree animation once
+                currentInterItem.GetComponent<Animator>().Play("PlantAnim");
+                //3. make fruit visible: this is horrible make gameobject database TODO
+                allItems[0].SetActive(true);
+                
+
+
             }
         }
     }
