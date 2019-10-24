@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInteractionItem : MonoBehaviour
 {
-    public GameObject[] allItems = new GameObject[10];
+    public GameObject[] allItems = new GameObject[20];
     public GameObject currentInterItem = null;
     public InteractionItem currentInterItemScript = null;
     public Inventory inventory;
@@ -28,14 +28,18 @@ public class PlayerInteractionItem : MonoBehaviour
             //check if item can be stored in inventory: check public inventory var from the script
             if (currentInterItemScript.inventory)
             {
-                Debug.Log("adding" + currentInterItem.name);
                 inventory.AddItem(currentInterItem);
             }
             // cant be stored in inventory: do something else
             // read sign
-            else if (currentInterItem.name == "sign")
+            else if (currentInterItem.name == "Shrooms")
             {
-                Debug.Log("TEST");
+                //allItems[4].SetActive(false);
+                for (int i = 5; i<=11; i++)
+                {
+                    allItems[i].SetActive(true);
+                }
+                    
             }
         }
         // drop item
@@ -44,11 +48,14 @@ public class PlayerInteractionItem : MonoBehaviour
                 inventory.DropItem();   
         }
 
+        if (Input.GetButtonDown("Interact") && currentInterItem.name == "shrooms")
+        {
+            Debug.Log("Eating shrooms");
+            enterAcidMode();
+        }
 
-
-
-        // USE
-        // item with an interactable environment 
+            // USE
+            // item with an interactable environment 
             if (Input.GetButtonDown("Use") && currentInterItem != null)
         {
             // bucket plus lake gives fulll bucket
@@ -70,7 +77,14 @@ public class PlayerInteractionItem : MonoBehaviour
                 //3. make fruit visible: this is horrible make gameobject database TODO
                 allItems[0].SetActive(true);
             }
-            
+            //fruit + animal = dead animal => can pass
+            if (inventory.GetInventoryItemName() == "fruit" && currentInterItem.name == "Animal")
+            {
+                //turn off colliders
+                allItems[3].GetComponent<BoxCollider2D>().enabled = false;
+                //kill animal: ie switch sprite to dead
+                allItems[3].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Characters/animal_dead");
+            }
         }
     }
 
@@ -95,5 +109,10 @@ public class PlayerInteractionItem : MonoBehaviour
                 currentInterItem = null;
             }
         }
+    }
+
+    void enterAcidMode()
+    {
+       
     }
 }
