@@ -48,21 +48,15 @@ public class PlayerInteractionItem : MonoBehaviour
                 inventory.DropItem();   
         }
 
-        if (Input.GetButtonDown("Interact") && currentInterItem.name == "shrooms")
-        {
-            Debug.Log("Eating shrooms");
-            enterAcidMode();
-        }
-
-            // USE
-            // item with an interactable environment 
-            if (Input.GetButtonDown("Use") && currentInterItem != null)
+        // USE
+        // item with an interactable environment 
+        if (Input.GetButtonDown("Use") && currentInterItem != null)
         {
             // bucket plus lake gives fulll bucket
-            if (inventory.GetInventoryItemName() == "bucket"  && currentInterItem.name == "lake" )
+            if (inventory.GetInventoryItemName() == "bucket" && currentInterItem.name == "lake")
             {
                 inventory.SetInventoryProperty("full", "bucket_full");
-               
+
                 //inventory.UpdateInventoryItem();
             }
             // interactable objects that cant be picked up
@@ -84,6 +78,13 @@ public class PlayerInteractionItem : MonoBehaviour
                 allItems[3].GetComponent<BoxCollider2D>().enabled = false;
                 //kill animal: ie switch sprite to dead
                 allItems[3].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Characters/animal_dead");
+            }
+            //boulder + x = hand becomes purpledrank
+            if (inventory.GetInventoryItemName() == "Boulder1" && currentInterItem.name == "TheX")
+            {
+                Debug.Log("PD");
+                //change hand to purple drank
+                allItems[5].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Environment/purpledrank");
             }
         }
     }
