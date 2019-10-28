@@ -7570,6 +7570,7 @@ MonoBehaviour:
   currentInterItem: {fileID: 0}
   currentInterItemScript: {fileID: 0}
   inventory: {fileID: 837671779}
+  isPurpledrank: 0
 --- !u!114 &837671779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7595,6 +7596,8 @@ GameObject:
   m_Component:
   - component: {fileID: 864270490}
   - component: {fileID: 864270491}
+  - component: {fileID: 864270492}
+  - component: {fileID: 864270493}
   m_Layer: 0
   m_Name: hand
   m_TagString: InteractableItem
@@ -7664,6 +7667,35 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &864270492
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864270489}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.30854464, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.3085446
+--- !u!114 &864270493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864270489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab4f0c6a6c1c426499a59667b4142ed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: 0
 --- !u!1 &961366837
 GameObject:
   m_ObjectHideFlags: 0

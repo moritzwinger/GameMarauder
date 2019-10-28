@@ -1,6 +1,7 @@
-﻿    using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerInteractionItem : MonoBehaviour
 {
@@ -8,14 +9,12 @@ public class PlayerInteractionItem : MonoBehaviour
     public GameObject currentInterItem = null;
     public InteractionItem currentInterItemScript = null;
     public Inventory inventory;
+    public bool isPurpledrank = false;
 
 
     private void Awake()
     {
-        // initialize all game objects of items and put them in an array, so they can easily be accessed
-
-        // get all gameobjects
-       // Resources.FindObjectsOfTypeAll(typeof(GameObject))
+      
     }
 
 
@@ -41,6 +40,11 @@ public class PlayerInteractionItem : MonoBehaviour
                 }
                     
             }
+            // roll credits
+            else if (currentInterItem.name == "hand" && isPurpledrank == true)
+            {
+                SceneManager.LoadScene("credits");
+            }
         }
         // drop item
         if (Input.GetButtonDown("Drop"))
@@ -56,8 +60,6 @@ public class PlayerInteractionItem : MonoBehaviour
             if (inventory.GetInventoryItemName() == "bucket" && currentInterItem.name == "lake")
             {
                 inventory.SetInventoryProperty("full", "bucket_full");
-
-                //inventory.UpdateInventoryItem();
             }
             // interactable objects that cant be picked up
 
@@ -82,9 +84,10 @@ public class PlayerInteractionItem : MonoBehaviour
             //boulder + x = hand becomes purpledrank
             if (inventory.GetInventoryItemName() == "Boulder1" && currentInterItem.name == "TheX")
             {
-                Debug.Log("PD");
                 //change hand to purple drank
                 allItems[5].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Environment/purpledrank");
+                //set isPurpledrank to true
+                isPurpledrank = true;
             }
         }
     }
@@ -110,10 +113,5 @@ public class PlayerInteractionItem : MonoBehaviour
                 currentInterItem = null;
             }
         }
-    }
-
-    void enterAcidMode()
-    {
-       
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public GameObject inventory = new GameObject();
+    public GameObject inventory;// = new GameObject();
     public Image InventoryImage;
     public string property;
 
@@ -15,9 +15,7 @@ public class Inventory : MonoBehaviour
         // pick up
         if (inventory == null)
         {
-            // inventory = item;
-            //update UI (Inventory)
-            //InventoryImage.sprite = item.GetComponent<SpriteRenderer>().sprite;      
+            //update UI (Inventory)     
             inventory = item;
             InventoryImage.sprite = item.GetComponent<SpriteRenderer>().sprite;
             item.SendMessage("DoInteraction");
@@ -30,6 +28,7 @@ public class Inventory : MonoBehaviour
             // UpdateInventory
             inventory = item;
             InventoryImage.sprite = item.GetComponent<SpriteRenderer>().sprite;
+          
             item.SendMessage("DoInteraction");
         }
     }
